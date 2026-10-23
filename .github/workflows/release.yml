@@ -78,8 +78,14 @@ jobs:
         with: { node-version: 22, cache: npm }
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '21' }
-      - uses: android-actions/setup-android@v3
-      - run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      # ubuntu-latest ships with the Android SDK preinstalled (ANDROID_HOME is set);
+      # android-actions/setup-android@v3 breaks on the runner's cmdline-tools, so we skip it.
+      - name: Android SDK packages
+        run: |
+          SDK="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+          echo "Using SDK at $SDK"
+          (yes || true) | timeout 120 sdkmanager --licenses --sdk_root="$SDK" > /dev/null 2>&1 || true
+          sdkmanager --install "platforms;android-36" "build-tools;36.0.0" --sdk_root="$SDK"
       - run: npm ci
       - run: npm ci
         working-directory: mobile
@@ -114,7 +120,9 @@ jobs:
         with: { name: android, path: out/*.apk }
 
   release:
-    needs: [web, windows, linux, mac, android]
+    # The APK is optional: a broken Android toolchain must not block the desktop, web and source builds.
+    needs: [web, windows, linux, mac]
+    if: always() && !cancelled() && !failure()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
