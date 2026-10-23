@@ -78,14 +78,16 @@ jobs:
         with: { node-version: 22, cache: npm }
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '21' }
-      # ubuntu-latest ships with the Android SDK preinstalled (ANDROID_HOME is set);
-      # android-actions/setup-android@v3 breaks on the runner's cmdline-tools, so we skip it.
+      # The runner image already has the Android SDK; only the cmdline-tools are
+      # broken in android-actions/setup-android@v3, so we call sdkmanager ourselves.
       - name: Android SDK packages
         run: |
           SDK="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
-          echo "Using SDK at $SDK"
-          (yes || true) | timeout 120 sdkmanager --licenses --sdk_root="$SDK" > /dev/null 2>&1 || true
-          sdkmanager --install "platforms;android-36" "build-tools;36.0.0" --sdk_root="$SDK"
+          SM=$(ls -d "$SDK"/cmdline-tools/*/bin/sdkmanager 2>/dev/null | tail -1)
+          echo "Using $SM with SDK at $SDK"
+          (yes || true) | timeout 120 "$SM" --licenses --sdk_root="$SDK" > /dev/null 2>&1 || true
+          "$SM" --install "platforms;android-36" "build-tools;36.0.0" --sdk_root="$SDK"
+          echo "$SDK/platform-tools" >> "$GITHUB_PATH"
       - run: npm ci
       - run: npm ci
         working-directory: mobile
