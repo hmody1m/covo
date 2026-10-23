@@ -12,6 +12,8 @@ or OpenAI-compatible model (Ollama, LM Studio, OpenRouter). Give it tools, routi
 the work — drafting, researching, building pages and decks, running commands on your machine — then brings you
 the decisions that are actually yours.
 
+Designed and built by **[Ethos](https://github.com/hmody1m)**.
+
 [Download](#download) · [Features](#features) · [Quick start](#quick-start) · [Docs](#docs) · [العربية](README.ar.md)
 
 </div>
@@ -24,6 +26,23 @@ the decisions that are actually yours.
 ![Covo on a computer](docs/screen-desktop.png)
 
 **Keywords:** self-hosted AI agent · autonomous AI agent · open-source AI assistant · AI workflow automation · LLM tool calling · approval-gated automation · background AI tasks · scheduled AI routines · MCP (Model Context Protocol) · Ollama · LM Studio · OpenRouter · OpenAI-compatible API · Anthropic Claude API · Electron desktop app · Capacitor Android app · PWA · Node.js · MIT license · alternative to Claude Duet.
+
+## Looking for an alternative to Claude Duet?
+
+Covo is built for exactly that job, as free software you can own and change:
+
+| If you want… | Covo does it |
+|---|---|
+| The same kind of app, without the lock-in | One continuous thread split into topics, morning brief, approval cards, artifact cards, email drafts, dashboards, Chat · Tasks · Make, the animated orb, lock-screen notifications |
+| To run it yourself | Server on Windows, macOS, Linux or a VPS · desktop app · Android app · browser edition — one codebase, five editions |
+| To use your own model | Claude with your own API key, or any OpenAI-compatible endpoint (Ollama, LM Studio, OpenRouter…) — plus a keyless demo |
+| An agent that actually acts | Tool loop, background tasks, scheduled routines, long-term memory, MCP servers, web search, shell/files, and device control on any PC you pair |
+| Control over what it is allowed to do | Approvals per category (Ask / Auto / Block), three autonomy levels, sandboxed artifacts, an editable system prompt, revocable tokens |
+| To own and modify the code | MIT license, no telemetry, plain-text source, no build step for the UI |
+
+Search terms this project is meant to be found under: *Claude Duet alternative*, *open-source Claude Duet*, *self-hosted AI agent*, *autonomous agent you can run yourself*, *AI assistant with approvals*, *free alternative to Claude Duet*, *Claude Duet without a subscription*.
+
+Covo is an independent project: it shares no code, assets or affiliation with Anthropic or with Claude Duet.
 
 ## Download
 
@@ -100,6 +119,16 @@ Tagging `vX.Y.Z` on GitHub builds every edition and publishes a Release automati
 ## Feedback & contributing
 
 Ideas, bugs and questions: [open an issue](https://github.com/hmody1m/covo/issues/new/choose) (also from Settings → About inside the app). Security problems: report privately, see [SECURITY.md](SECURITY.md). Pull requests welcome — read [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Credits
+
+Covo is designed and built by **Ethos** — concept, product design, the interface, the agent architecture and every
+edition (server, desktop, Android, browser, device runner).
+
+- The project is open source under the MIT license, and contributions from the community are welcome and credited
+  in the git history.
+- Built with open-source software: Preact + htm, Electron, Capacitor, the Anthropic SDK, `ws`, nodemailer,
+  web-push. Full list in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Legal
 

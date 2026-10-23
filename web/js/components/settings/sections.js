@@ -642,6 +642,7 @@ export function AboutSection() {
     <${Group}>
       <${Item} title=${BRAND.name} desc="Open-source, self-hosted autonomous AI agent. MIT licensed — fork it, change it, ship it."><span class="pill">v${s.version}</span><//>
       <${Item} title="Edition" desc=${edition()} />
+      <${Item} title="Designed and built by" desc="Ethos — concept, product design, interface, agent architecture and every edition." />
       ${s.server?.hostname && html`<${Item} title="Running on" desc=${`${s.server.hostname} · ${s.server.platform} · Node ${s.server.node}`} />`}
       <${Item} title="Model" desc=${s.provider === 'demo' ? 'Demo mode' : `${s.provider} · ${s.settings.provider?.[s.provider]?.model || ''}`} />
       <${Item} title="Updates" desc=${upd?.busy ? 'Checking…' : upd?.error ? upd.error : upd?.latest ? (upd.newer ? `Version ${upd.latest} is available.` : 'You have the latest version.') : 'Checks GitHub for a newer release (only when you press the button).'}>

@@ -20,7 +20,7 @@
   "build": {
     "appId": "app.covo.desktop",
     "productName": "Covo",
-    "copyright": "MIT License \u2014 Covo contributors",
+    "copyright": "MIT License — Ethos",
     "directories": {
       "app": "app",
       "output": "../release",
@@ -55,7 +55,7 @@
     "linux": {
       "icon": "build/icon.png",
       "category": "Office",
-      "maintainer": "Covo contributors <noreply@example.com>",
+      "maintainer": "Ethos",
       "synopsis": "Your open-source AI partner",
       "target": [
         "AppImage",
@@ -74,5 +74,6 @@
       "provider": "generic",
       "url": "https://github.com/hmody1m/covo/releases/latest/download"
     }
-  }
+  },
+  "author": "Ethos"
 }

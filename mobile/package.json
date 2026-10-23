@@ -16,5 +16,6 @@
   },
   "devDependencies": {
     "@capacitor/cli": "8.5.2"
-  }
+  },
+  "author": "Ethos"
 }

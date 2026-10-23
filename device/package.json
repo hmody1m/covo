@@ -5,6 +5,11 @@
   "type": "module",
   "main": "covo-device.js",
   "license": "MIT",
-  "scripts": { "start": "node covo-device.js" },
-  "dependencies": { "ws": "^8.18.0" }
+  "scripts": {
+    "start": "node covo-device.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "author": "Ethos"
 }
