@@ -120,9 +120,13 @@ jobs:
         with: { name: android, path: out/*.apk }
 
   release:
-    # The APK is optional: a broken Android toolchain must not block the desktop, web and source builds.
-    needs: [web, windows, linux, mac]
-    if: always() && !cancelled() && !failure()
+    # The APK is optional: a broken Android toolchain must not withhold the
+    # desktop, web and source builds. Every other job is required.
+    needs: [web, windows, linux, mac, android]
+    if: |
+      always() && !cancelled() &&
+      needs.web.result == 'success' && needs.windows.result == 'success' &&
+      needs.linux.result == 'success' && needs.mac.result == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
