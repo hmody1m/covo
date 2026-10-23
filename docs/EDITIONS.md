@@ -71,7 +71,7 @@ npx serve dist/web     # or any static host
 ```
 The unmodified server core is bundled with esbuild (`standalone/entry.js`) and runs in the page: storage is IndexedDB, files are blobs, and the agent calls your model provider from the browser (Anthropic allows this with your key; other providers must allow CORS). Commands, files on disk, device pairing, Web Push and SMTP are server-only and hidden here.
 
-GitHub Pages: enable *Settings → Pages → Source: GitHub Actions*; `.github/workflows/pages.yml` publishes `dist/web` on every push to `main`.
+Hosting: `dist/web` is plain static files — put it on any static host. GitHub Pages is optional and off by default: enable *Settings → Pages → Source: GitHub Actions*, then edit `.github/workflows/pages.yml` to fire on a push (or start it from the Actions tab). Only do this if you want a public URL for the browser edition.
 
 ## Releases
 

@@ -25,7 +25,7 @@ briefs you every morning, works in the background, and asks you only when it mat
 | **Windows app** | `Covo-Setup-x.y.z-x64.exe` (installer) or `Covo-Portable-x.y.z-x64.exe` (no install) | Working on your PC: the agent runs on this computer, with your approval |
 | **macOS / Linux app** | `.dmg` · `.AppImage` · `.deb` | Same as above |
 | **Android app** | `Covo-x.y.z-android.apk` | Covo in your pocket, or open your own Covo server |
-| **Browser edition** | `Covo-x.y.z-web.zip`, or the project's GitHub Pages site | Try it with no install; everything stays in your browser |
+| **Browser edition** | `Covo-x.y.z-web.zip` (unzip and open `index.html`, or serve the folder) | Try it with no install; everything stays in your browser |
 | **Server** | This repository (`npm start`, Docker, VPS script) | Always-on agent you reach from every device |
 
 All files are on the [**Releases**](https://github.com/hmody1m/covo/releases) page with a `SHA256SUMS.txt`. Builds may not be code-signed yet, so Windows SmartScreen may say *"Windows protected your PC"* → **More info → Run anyway**, and Android asks you to allow installs from your browser. Only install files from the official Releases page.
@@ -65,7 +65,7 @@ Details: [docs/DEPLOY_VPS.md](docs/DEPLOY_VPS.md).
 ## Build it yourself
 
 ```bash
-npm run build:web     # browser edition → dist/web (static files; GitHub Pages ready)
+npm run build:web     # browser edition → dist/web (static files; host them anywhere)
 npm run desktop       # run the desktop app in development
 npm run dist:win      # Windows installer + portable .exe → release/
 npm run dist:linux    # AppImage + .deb        (dist:mac on a Mac)

@@ -1,10 +1,11 @@
-# Publishes the browser edition (dist/web) to GitHub Pages.
-# Enable it once: repository Settings → Pages → Source: GitHub Actions.
+# Optional: publishes the browser edition (dist/web) to GitHub Pages.
+# Off by default — every push to main would publish a public URL. To use it:
+#   1. Repository Settings → Pages → Source: GitHub Actions
+#   2. Change the trigger below to `push: branches: [main]`, or start it by hand
+#      from the Actions tab (Run workflow).
 name: Pages
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
