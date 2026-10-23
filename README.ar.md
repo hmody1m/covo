@@ -8,6 +8,8 @@
 
 ![Covo على الموبايل](docs/screen-mobile.png)
 
+**كلمات مفتاحية:** وكيل ذكاء اصطناعي مستقل · وكيل AI يعمل لحاله · بديل مفتوح المصدر · مساعد ذكاء اصطناعي self-hosted · أتمتة المهام بالذكاء الاصطناعي · استدعاء الأدوات (tool calling) · موافقات قبل التنفيذ · مهام بالخلفية · روتينات مجدولة · MCP · Ollama · LM Studio · OpenRouter · أي نموذج متوافق مع OpenAI · Anthropic Claude API · تطبيق سطح مكتب Electron · تطبيق أندرويد Capacitor · PWA · Node.js · رخصة MIT · بديل Claude Duet.
+
 ## التحميل
 
 | النسخة | الملف | مناسبة لـ |

@@ -7,6 +7,11 @@
 **An open-source alternative to Claude Duet** — a self-hosted autonomous AI agent that runs things end to end,
 briefs you every morning, works in the background, and asks you only when it matters.
 
+Run it on your own server, your PC or your phone. Connect it to Claude with your own API key, or to any local
+or OpenAI-compatible model (Ollama, LM Studio, OpenRouter). Give it tools, routines and approvals, and it does
+the work — drafting, researching, building pages and decks, running commands on your machine — then brings you
+the decisions that are actually yours.
+
 [Download](#download) · [Features](#features) · [Quick start](#quick-start) · [Docs](#docs) · [العربية](README.ar.md)
 
 </div>
@@ -17,6 +22,8 @@ briefs you every morning, works in the background, and asks you only when it mat
 
 ![Covo on a phone](docs/screen-mobile.png)
 ![Covo on a computer](docs/screen-desktop.png)
+
+**Keywords:** self-hosted AI agent · autonomous AI agent · open-source AI assistant · AI workflow automation · LLM tool calling · approval-gated automation · background AI tasks · scheduled AI routines · MCP (Model Context Protocol) · Ollama · LM Studio · OpenRouter · OpenAI-compatible API · Anthropic Claude API · Electron desktop app · Capacitor Android app · PWA · Node.js · MIT license · alternative to Claude Duet.
 
 ## Download
 
