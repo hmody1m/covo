@@ -1,0 +1,13 @@
+node_modules/
+data/*
+!data/.gitkeep
+.env
+*.log
+dist/
+release/
+desktop/app/
+desktop/node_modules/
+mobile/node_modules/
+mobile/android/keystore.properties
+*.jks
+*.keystore

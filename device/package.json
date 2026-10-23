@@ -1,0 +1,10 @@
+{
+  "name": "covo-device",
+  "version": "1.0.0",
+  "description": "Runner that lets your Covo agent use this computer (with your approval).",
+  "type": "module",
+  "main": "covo-device.js",
+  "license": "MIT",
+  "scripts": { "start": "node covo-device.js" },
+  "dependencies": { "ws": "^8.18.0" }
+}

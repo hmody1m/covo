@@ -1,0 +1,78 @@
+{
+  "name": "covo-desktop",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Covo desktop app (Windows, macOS, Linux)",
+  "license": "MIT",
+  "scripts": {
+    "stage": "node scripts/stage.mjs",
+    "start": "npm run stage && electron app",
+    "dev": "electron src/main.cjs",
+    "dist:win": "npm run stage && electron-builder --win nsis portable --x64 --publish never",
+    "dist:linux": "npm run stage && electron-builder --linux AppImage deb --x64 --publish never",
+    "dist:mac": "npm run stage && electron-builder --mac dmg zip --publish never"
+  },
+  "devDependencies": {
+    "electron": "33.4.11",
+    "electron-builder": "26.0.12",
+    "resedit": "2.0.3"
+  },
+  "build": {
+    "appId": "app.covo.desktop",
+    "productName": "Covo",
+    "copyright": "MIT License \u2014 Covo contributors",
+    "directories": {
+      "app": "app",
+      "output": "../release",
+      "buildResources": "build"
+    },
+    "asar": false,
+    "npmRebuild": false,
+    "afterPack": "scripts/after-pack.cjs",
+    "artifactName": "Covo-${version}-${os}-${arch}.${ext}",
+    "win": {
+      "icon": "build/icon.ico",
+      "signAndEditExecutable": false,
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Covo",
+      "license": "build/license.txt",
+      "artifactName": "Covo-Setup-${version}-${arch}.${ext}",
+      "deleteAppDataOnUninstall": false
+    },
+    "portable": {
+      "artifactName": "Covo-Portable-${version}-${arch}.${ext}"
+    },
+    "linux": {
+      "icon": "build/icon.png",
+      "category": "Office",
+      "maintainer": "Covo contributors <noreply@example.com>",
+      "synopsis": "Your open-source AI partner",
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "mac": {
+      "icon": "build/icon.png",
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "publish": {
+      "provider": "generic",
+      "url": "https://github.com/hmody1m/covo/releases/latest/download"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "server": "https://covo.example.com",
+  "token": "dev_paste_token_here",
+  "name": "My Windows PC",
+  "workdir": "C:\\Users\\me\\Documents",
+  "allow": "run_command,read_file,write_file,list_dir,system_info,open,screenshot,desktop_notify",
+  "blockedCommands": ["rm -rf /", "format c:", "shutdown"]
+}

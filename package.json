@@ -1,0 +1,60 @@
+{
+  "name": "covo",
+  "version": "1.0.0",
+  "description": "Open-source, self-hosted autonomous AI agent with a mobile + desktop chat UI. Runs on Windows, macOS, Linux or a VPS.",
+  "type": "module",
+  "main": "server/index.js",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "device": "node device/covo-device.js",
+    "reset-password": "node server/cli.js reset-password",
+    "test": "node --test --test-concurrency=1 test/*.test.js",
+    "build:web": "node scripts/build-web.mjs",
+    "desktop": "npm --prefix desktop install && npm --prefix desktop start",
+    "dist:win": "npm --prefix desktop install && npm --prefix desktop run dist:win",
+    "dist:linux": "npm --prefix desktop install && npm --prefix desktop run dist:linux",
+    "dist:mac": "npm --prefix desktop install && npm --prefix desktop run dist:mac",
+    "apk": "npm --prefix mobile install && npm --prefix mobile run apk:release",
+    "licenses": "node scripts/gen-licenses.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.1.0",
+    "nodemailer": "^6.9.16",
+    "web-push": "^3.6.7",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "esbuild": "^0.25.10",
+    "events": "^3.3.0",
+    "fast-sha256": "^1.3.0",
+    "htm": "^3.1.1",
+    "path-browserify": "^1.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hmody1m/covo.git"
+  },
+  "homepage": "https://github.com/hmody1m/covo#readme",
+  "bugs": {
+    "url": "https://github.com/hmody1m/covo/issues"
+  },
+  "keywords": [
+    "ai-agent",
+    "autonomous-agent",
+    "self-hosted",
+    "assistant",
+    "open-source",
+    "claude",
+    "anthropic-api",
+    "llm",
+    "pwa",
+    "electron",
+    "capacitor"
+  ]
+}

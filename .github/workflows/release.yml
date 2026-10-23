@@ -1,0 +1,130 @@
+# Push a tag like v1.2.0 (same as package.json "version") to build every edition
+# and publish a GitHub Release with SHA256SUMS.txt.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm test
+      - run: npm run build:web
+      - name: Zip browser edition and source
+        run: |
+          V=$(node -p "require('./package.json').version")
+          mkdir -p out
+          (cd dist/web && zip -qr ../../out/Covo-$V-web.zip .)
+          git archive --format=zip --prefix=covo-$V/ -o out/Covo-$V-source.zip HEAD
+      - uses: actions/upload-artifact@v4
+        with: { name: web, path: out/* }
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: desktop/package-lock.json }
+      - run: npm ci
+        working-directory: desktop
+      - run: npm run dist:win
+        working-directory: desktop
+      - uses: actions/upload-artifact@v4
+        with: { name: windows, path: release/*.exe }
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: desktop/package-lock.json }
+      - run: npm ci
+        working-directory: desktop
+      - run: npm run dist:linux
+        working-directory: desktop
+      - uses: actions/upload-artifact@v4
+        with: { name: linux, path: "release/*.AppImage\nrelease/*.deb" }
+
+  mac:
+    runs-on: macos-latest
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: desktop/package-lock.json }
+      - run: npm ci
+        working-directory: desktop
+      - run: npm run dist:mac
+        working-directory: desktop
+      - uses: actions/upload-artifact@v4
+        with: { name: mac, path: release/*.dmg }
+
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '21' }
+      - uses: android-actions/setup-android@v3
+      - run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      - run: npm ci
+      - run: npm ci
+        working-directory: mobile
+      - name: Signing key (optional)
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then
+            echo "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/covo.jks"
+            echo "COVO_KEYSTORE=$RUNNER_TEMP/covo.jks" >> "$GITHUB_ENV"
+          fi
+      - name: Build APK
+        env:
+          COVO_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          COVO_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          COVO_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        working-directory: mobile
+        run: |
+          npm run sync
+          cd android && chmod +x gradlew
+          V=$(node -p "require('../../package.json').version")
+          mkdir -p ../../out
+          if [ -n "$COVO_KEYSTORE" ]; then
+            ./gradlew assembleRelease --no-daemon
+            cp app/build/outputs/apk/release/app-release.apk ../../out/Covo-$V-android.apk
+          else
+            echo "::warning::No signing key secrets: publishing a debug-signed APK."
+            ./gradlew assembleDebug --no-daemon
+            cp app/build/outputs/apk/debug/app-debug.apk ../../out/Covo-$V-android.apk
+          fi
+      - uses: actions/upload-artifact@v4
+        with: { name: android, path: out/*.apk }
+
+  release:
+    needs: [web, windows, linux, mac, android]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { path: files, merge-multiple: true }
+      - name: Checksums
+        run: cd files && sha256sum * > SHA256SUMS.txt && cat SHA256SUMS.txt
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: files/*
+          generate_release_notes: true
+          body: |
+            Covo is an independent open-source project, not affiliated with Anthropic.
+            Check downloads against `SHA256SUMS.txt`. Builds are not code-signed yet: on Windows choose **More info → Run anyway**.

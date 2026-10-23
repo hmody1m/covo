@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Covo</string>
+    <string name="title_activity_main">Covo</string>
+    <string name="package_name">app.covo.mobile</string>
+    <string name="custom_url_scheme">app.covo.mobile</string>
+</resources>

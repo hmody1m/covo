@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions & discussions
+    url: https://github.com/hmody1m/covo/discussions
+    about: Ask questions and share how you use Covo.
+  - name: Report a security vulnerability
+    url: https://github.com/hmody1m/covo/security/advisories/new
+    about: Please report security issues privately.

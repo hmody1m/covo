@@ -1,0 +1,11 @@
+name: Idea or feedback
+description: Suggest a feature or tell us what you think
+labels: [feedback]
+body:
+  - type: textarea
+    id: idea
+    attributes: { label: Your idea or feedback, description: What would make Covo better for you? }
+    validations: { required: true }
+  - type: textarea
+    id: why
+    attributes: { label: Why it matters, description: What are you trying to get done? }

@@ -1,0 +1,18 @@
+{
+  "appId": "app.covo.mobile",
+  "appName": "Covo",
+  "webDir": "../dist/web",
+  "backgroundColor": "#F9F9F6",
+  "loggingBehavior": "debug",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true,
+    "allowNavigation": ["*"]
+  },
+  "android": {
+    "appendUserAgent": "CovoApp",
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "covo-mobile",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Covo Android app (Capacitor). Wraps the standalone edition from dist/web.",
+  "license": "MIT",
+  "scripts": {
+    "sync": "node ../scripts/build-web.mjs && cap sync android",
+    "apk:debug": "npm run sync && cd android && ./gradlew assembleDebug",
+    "apk:release": "npm run sync && cd android && ./gradlew assembleRelease",
+    "open": "cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.2",
+    "@capacitor/core": "8.5.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.2"
+  }
+}

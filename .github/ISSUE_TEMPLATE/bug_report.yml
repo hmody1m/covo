@@ -1,0 +1,26 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks! Please don't include API keys, passwords or private data. Security problems → use **Security → Report a vulnerability** instead."
+  - type: textarea
+    id: what
+    attributes: { label: What happened?, description: Steps to reproduce, what you expected, what you saw. }
+    validations: { required: true }
+  - type: dropdown
+    id: edition
+    attributes:
+      label: Edition
+      options: [Server (Windows), Server (macOS/Linux), Server (Docker/VPS), Desktop app, Android app, Browser edition]
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes: { label: Version, description: Settings → About }
+  - type: input
+    id: model
+    attributes: { label: Model provider / model, placeholder: "Claude · claude-opus-5-5" }
+  - type: textarea
+    id: logs
+    attributes: { label: Logs, description: Settings → Developer → Server log (remove anything private), render: text }

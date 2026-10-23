@@ -1,0 +1,29 @@
+# Covo on a VPS with automatic HTTPS (Caddy + Let's Encrypt).
+#   1. Point a domain (e.g. covo.example.com) to your VPS IP (DNS A record)
+#   2. cp docker/.env.example docker/.env  and set COVO_DOMAIN
+#   3. docker compose -f docker/docker-compose.yml up -d --build
+services:
+  covo:
+    build: { context: .., dockerfile: docker/Dockerfile }
+    restart: unless-stopped
+    environment:
+      - SECURE_COOKIES=1
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    volumes:
+      - covo-data:/data
+    expose: ["8787"]
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment:
+      - COVO_DOMAIN=${COVO_DOMAIN:?set COVO_DOMAIN in docker/.env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on: [covo]
+volumes:
+  covo-data:
+  caddy-data:
+  caddy-config:
